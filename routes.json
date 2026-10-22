@@ -1,0 +1,139 @@
+{
+  "$comment": "keyword-router 规则文件。改完保存即可生效（不需要重启网关），因为插件按文件 mtime 重新加载。",
+
+  "settings": {
+    "enabled": true,
+    "timeoutMs": 20000,
+    "maxOutputChars": 3500,
+    "maxReplyChars": 4000,
+    "onlySenders": [],
+    "log": true,
+    "publicIpLookup": true,
+    "publicIpTimeoutMs": 3500
+  },
+
+  "routes": [
+    {
+      "id": "ip",
+      "description": "查看本机 IP（局域网 + 公网）",
+      "priority": 100,
+      "match": {
+        "keywords": ["ip地址", "本机ip", "本地ip", "内网ip", "公网ip", "我的ip", "ip是多少", "看下ip", "查看ip"],
+        "regex": ["\\bip\\b"]
+      },
+      "action": { "type": "builtin", "name": "ip" }
+    },
+
+    {
+      "id": "sysinfo",
+      "description": "查看电脑系统信息",
+      "priority": 60,
+      "match": {
+        "keywords": ["系统信息", "电脑配置", "电脑信息", "系统版本", "配置信息"]
+      },
+      "action": { "type": "builtin", "name": "sysinfo" }
+    },
+
+    {
+      "id": "hostname",
+      "description": "查看主机名",
+      "priority": 55,
+      "match": { "keywords": ["主机名", "电脑名"] },
+      "action": { "type": "builtin", "name": "hostname" }
+    },
+
+    {
+      "id": "disk",
+      "description": "查看磁盘剩余空间",
+      "priority": 55,
+      "match": { "keywords": ["磁盘空间", "硬盘空间", "硬盘还有多少", "c盘空间", "磁盘"] },
+      "action": { "type": "builtin", "name": "disk" }
+    },
+
+    {
+      "id": "mem",
+      "description": "查看内存占用",
+      "priority": 55,
+      "match": { "keywords": ["内存占用", "内存还有多少", "剩多少内存", "内存"] },
+      "action": { "type": "builtin", "name": "mem" }
+    },
+
+    {
+      "id": "uptime",
+      "description": "查看开机时长",
+      "priority": 55,
+      "match": { "keywords": ["开机多久", "运行多久", "开机时间", "多久没重启"] },
+      "action": { "type": "builtin", "name": "uptime" }
+    },
+
+    {
+      "id": "time",
+      "description": "查看当前时间",
+      "priority": 50,
+      "match": { "keywords": ["几点了", "现在几点", "现在时间", "当前时间"], "regex": ["^\\s*(?:time|时间|日期)\\s*$"] },
+      "action": { "type": "builtin", "name": "time" }
+    },
+
+    {
+      "id": "help",
+      "description": "列出当前本地关键词",
+      "priority": 40,
+      "match": { "regex": ["^\\s*(?:help|帮助|命令|关键词)\\s*$"] },
+      "action": { "type": "builtin", "name": "help" }
+    },
+
+    {
+      "id": "example-powershell",
+      "enabled": false,
+      "description": "示例：命中关键词后跑你自己写的 PowerShell 脚本",
+      "priority": 20,
+      "match": { "keywords": ["执行备份", "备份一下"] },
+      "action": {
+        "type": "ps1",
+        "path": "C:\\scripts\\backup.ps1",
+        "args": ["-Quick"]
+      },
+      "template": "备份结果：\n{{output}}"
+    },
+
+    {
+      "id": "example-node",
+      "enabled": false,
+      "description": "示例：命中关键词后跑你自己写的 Node 脚本（用网关同一个 node 解释器）",
+      "priority": 20,
+      "match": { "keywords": ["清理缓存"] },
+      "action": {
+        "type": "node",
+        "path": "C:\\scripts\\clean-cache.mjs",
+        "args": ["--yes"]
+      },
+      "template": "{{output}}"
+    },
+
+    {
+      "id": "example-cmd",
+      "enabled": false,
+      "description": "示例：直接跑一条 cmd 命令。{{text}} 会被替换成你发来的原文，{{match}} 是命中的关键词",
+      "priority": 20,
+      "match": { "keywords": ["查进程"] },
+      "action": {
+        "type": "cmd",
+        "command": "tasklist | findstr /i node"
+      },
+      "template": "node 相关进程：\n{{output}}"
+    },
+
+    {
+      "id": "example-python",
+      "enabled": false,
+      "description": "示例：跑 Python 脚本",
+      "priority": 20,
+      "match": { "keywords": ["跑个python"] },
+      "action": {
+        "type": "python",
+        "path": "C:\\scripts\\demo.py",
+        "args": ["{{match}}"]
+      }
+    }
+  ]
+}

@@ -1,0 +1,4 @@
+# 规范化行尾：仓库里存 LF，Windows 用户 checkout 自动拿 CRLF
+* text=auto
+*.cmd text eol=crlf
+*.ps1 text eol=crlf

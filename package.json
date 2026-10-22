@@ -1,0 +1,35 @@
+{
+  "name": "openclaw-keyword-router",
+  "version": "1.1.0",
+  "private": true,
+  "description": "OpenClaw 关键词旁路插件：命中关键词时本地执行脚本并直接回复（0 token），未命中才交给大模型。",
+  "keywords": [
+    "openclaw",
+    "openclaw-plugin",
+    "keyword-router",
+    "wechat",
+    "clawbot",
+    "token-saving"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/demonnicelzb/openclaw-keyword-router.git"
+  },
+  "homepage": "https://github.com/demonnicelzb/openclaw-keyword-router#readme",
+  "bugs": {
+    "url": "https://github.com/demonnicelzb/openclaw-keyword-router/issues"
+  },
+  "type": "module",
+  "engines": {
+    "node": ">=22.19"
+  },
+  "openclaw": {
+    "extensions": ["./index.js"],
+    "runtimeExtensions": ["./index.js"],
+    "compat": {
+      "pluginApi": ">=2026.6.11",
+      "minGatewayVersion": "2026.6.11"
+    }
+  }
+}

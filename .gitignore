@@ -1,0 +1,14 @@
+# 运行产物 / 本机私有文件，不需要进仓库
+*.log
+*.zip
+*.bak
+*.bak.*
+
+# 编辑器 / 系统
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# 依赖（本项目零依赖，留着以防以后加）
+node_modules/

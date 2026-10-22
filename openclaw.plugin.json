@@ -1,0 +1,24 @@
+{
+  "id": "keyword-router",
+  "name": "Keyword Router",
+  "description": "关键词短路：命中关键词时在本地执行内置功能或你自己的脚本并直接回复，不再调用大模型；未命中的消息照常交给大模型。",
+  "activation": {
+    "onStartup": true
+  },
+  "configSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "routesPath": {
+        "type": "string",
+        "description": "规则文件路径；相对路径按插件目录解析。默认 ./routes.json"
+      }
+    }
+  },
+  "uiHints": {
+    "routesPath": {
+      "label": "规则文件",
+      "help": "关键词规则的 JSON 文件，默认 plugins 目录下的 routes.json"
+    }
+  }
+}
